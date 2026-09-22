@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Anderson Almeida | Desenvolvedor Web</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #020817;
+            --bg-soft: #0f172a;
+            --panel: rgba(15, 23, 42, 0.82);
+            --panel-strong: #111827;
+            --primary: #38bdf8;
+            --primary-dark: #0ea5e9;
+            --text: #e2e8f0;
+            --muted: #94a3b8;
+            --line: rgba(148, 163, 184, 0.2);
+            --white: #ffffff;
+            --shadow: 0 20px 45px rgba(14, 165, 233, 0.14);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background:
+                radial-gradient(circle at top, rgba(56, 189, 248, 0.15), transparent 30%),
+                linear-gradient(135deg, var(--bg), #0f172a 45%, #111827);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(2, 8, 23, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--line);
+            padding: 16px 20px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            z-index: 1000;
+        }
+
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: .3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width .3s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 120px 20px 80px;
+            background: linear-gradient(135deg, rgba(2, 8, 23, 0.75), rgba(15, 23, 42, 0.9));
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border: 1px solid rgba(56, 189, 248, 0.35);
+            background: rgba(56, 189, 248, 0.08);
+            border-radius: 999px;
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.8rem, 6vw, 5rem);
+            line-height: 1.1;
+            margin-bottom: 18px;
+            letter-spacing: -0.05em;
+            font-weight: 700;
+        }
+
+        .hero span {
+            color: var(--primary);
+        }
+
+        .hero p {
+            color: var(--muted);
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            max-width: 700px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 28px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 24px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #03121c;
+            box-shadow: var(--shadow);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            color: var(--white);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .hero-stats {
+            margin-top: 38px;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(120px, 1fr));
+            gap: 18px;
+            width: min(700px, 100%);
+        }
+
+        .stat {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 18px 12px;
+        }
+
+        .stat strong {
+            display: block;
+            font-size: 1.4rem;
+            color: var(--primary);
+        }
+
+        .stat span {
+            color: var(--muted);
+            font-size: .85rem;
+        }
+
+        section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 100px 20px;
+        }
+
+        .section-header {
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+            color: var(--primary);
+            font-size: clamp(2rem, 4vw, 2.7rem);
+            letter-spacing: -0.04em;
+        }
+
+        .section-header p {
+            color: var(--muted);
+            max-width: 650px;
+        }
+
+        .card {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid var(--line);
+            padding: 28px;
+            border-radius: 18px;
+            box-shadow: 0 15px 30px rgba(15, 23, 42, 0.25);
+            transition: transform .25s ease, border-color .25s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(56, 189, 248, 0.5);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.3fr .7fr;
+            gap: 24px;
+            align-items: stretch;
+        }
+
+        .about-copy {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .about-copy p {
+            color: var(--text);
+            opacity: .9;
+        }
+
+        .mini-panel {
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(15, 23, 42, 0.8));
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            border-radius: 18px;
+            padding: 24px;
+        }
+
+        .mini-panel h3 {
+            margin-bottom: 12px;
+            color: var(--white);
+        }
+
+        .mini-panel ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .mini-panel li {
+            color: var(--muted);
+            padding-left: 18px;
+            position: relative;
+        }
+
+        .mini-panel li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 14px 16px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .skill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(56, 189, 248, 0.12);
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            color: var(--primary);
+            padding: 12px 18px;
+            border-radius: 999px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-align: center;
+            transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+            box-shadow: 0 8px 20px rgba(56, 189, 248, 0.08);
+        }
+
+        .skill:nth-child(4n + 1),
+        .skill:nth-child(4n + 3) {
+            transform: translateY(8px);
+        }
+
+        .skill:nth-child(4n + 2),
+        .skill:nth-child(4n + 4) {
+            transform: translateY(0);
+        }
+
+        .skill:hover {
+            transform: translateY(-2px);
+            border-color: rgba(56, 189, 248, 0.45);
+            box-shadow: 0 12px 24px rgba(56, 189, 248, 0.15);
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 22px;
+        }
+
+        .project-card {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform .25s ease, border-color .25s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(56, 189, 248, 0.45);
+        }
+
+        .project-thumb {
+            height: 180px;
+            overflow: hidden;
+            border-bottom: 1px solid var(--line);
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.19), rgba(15, 23, 42, 0.7));
+            position: relative;
+        }
+
+        .project-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform .35s ease;
+            filter: blur(1.5px) brightness(0.7);
+        }
+
+        .project-card:hover .project-thumb img {
+            transform: scale(1.05);
+        }
+
+        .project-card.loading-project .project-thumb {
+            background-image: linear-gradient(rgba(2, 8, 23, 0.55), rgba(2, 8, 23, 0.75)),
+                url('https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .project-card.loading-project .project-thumb::after {
+            content: "LOADING";
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(1.1rem, 2vw, 2rem);
+            font-weight: 700;
+            letter-spacing: .18em;
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.45);
+            z-index: 1;
+        }
+
+        .project-card.loading-project .project-thumb img {
+            display: none;
+        }
+
+        .project-content {
+            padding: 24px;
+        }
+
+        .project-content h3 {
+            margin-bottom: 10px;
+            color: var(--white);
+        }
+
+        .project-content p {
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        .contact-card {
+            display: grid;
+            grid-template-columns: 1.2fr .8fr;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .contact-list {
+            display: grid;
+            gap: 14px;
+            color: var(--text);
+        }
+
+        .contact-list a {
+            color: var(--primary);
+        }
+
+        .contact-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            align-items: flex-start;
+        }
+
+        .whatsapp-btn {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: white;
+            box-shadow: 0 18px 30px rgba(34, 197, 94, 0.2);
+        }
+
+        footer {
+            text-align: center;
+            padding: 28px 20px 60px;
+            color: var(--muted);
+            border-top: 1px solid var(--line);
+            background: rgba(2, 8, 23, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                gap: 16px;
+                flex-wrap: wrap;
+            }
+
+            .about-grid,
+            .contact-card {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-stats {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding-top: 80px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a href="#sobre">Sobre</a>
+        <a href="#skills">Skills</a>
+        <a href="#projetos">Projetos</a>
+        <a href="#contato">Contato</a>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-badge">Disponível para oportunidades</div>
+        <h1>Anderson <span>Almeida</span></h1>
+        <p>Desenvolvedor Web • Suporte Técnico • Infraestrutura de Redes</p>
+
+        <div class="hero-actions">
+            <a href="#contato" class="btn btn-primary">Falar comigo</a>
+            <a href="curriculo.pdf" download class="btn btn-secondary">Baixar currículo</a>
+        </div>
+
+        <div class="hero-stats">
+            <div class="stat">
+                <strong>+3</strong>
+                <span>Anos de estudo e prática</span>
+            </div>
+            <div class="stat">
+                <strong>12+</strong>
+                <span>Competências técnicas</span>
+            </div>
+            <div class="stat">
+                <strong>3</strong>
+                <span>Projetos em destaque</span>
+            </div>
+        </div>
+    </header>
+
+    <section id="sobre">
+        <div class="section-header">
+            <h2>Sobre Mim</h2>
+            <p>Desenvolvedor com foco em soluções web, infraestrutura e suporte técnico.</p>
+        </div>
+
+        <div class="about-grid">
+            <div class="card about-copy">
+                <p>Sou Anderson Almeida, formado em Tecnologia em Desenvolvimento Web e apaixonado por tecnologia,
+                    desenvolvimento e tudo que envolve entender como as coisas funcionam.</p>
+
+                <p>Minha trajetória na tecnologia começou antes mesmo da faculdade, passando por redes de computadores,
+                    telecomunicações, suporte técnico e infraestrutura. Com o tempo, fui direcionando cada vez mais meu
+                    interesse para o desenvolvimento de software e para a criação de soluções web.</p>
+
+                <p>Tenho experiência prática com desenvolvimento web, Linux, redes de computadores e diferentes sistemas
+                    operacionais, além de manter um interesse crescente por cibersegurança. Gosto especialmente de
+                    aprender como os sistemas funcionam por dentro, identificar problemas, entender suas causas e
+                    descobrir maneiras de solucioná-los.</p>
+            </div>
+
+            <aside class="mini-panel">
+                <h3>Perfil</h3>
+                <ul>
+                    <li>Curioso e autodidata</li>
+                    <li>Organizado e persistente</li>
+                    <li>Focado em soluções práticas</li>
+                    <li>Interesse em desenvolvimento, automação e segurança</li>
+                </ul>
+            </aside>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="section-header">
+            <h2>Habilidades</h2>
+            <p>Ferramentas e áreas em que venho desenvolvendo habilidades e aplicando na prática.</p>
+        </div>
+
+        <div class="skills">
+            <div class="skill">HTML5</div>
+            <div class="skill">CSS3</div>
+            <div class="skill">JavaScript</div>
+            <div class="skill">GitHub</div>
+            <div class="skill">Banco de Dados</div>
+            <div class="skill">Lógica de Programação</div>
+            <div class="skill">Redes</div>
+            <div class="skill">Hardware</div>
+            <div class="skill">Suporte Técnico</div>
+            <div class="skill">Pacote Office</div>
+            <div class="skill">Linux</div>
+            <div class="skill">SQL</div>
+        </div>
+    </section>
+
+    <section id="projetos">
+        <div class="section-header">
+            <h2>Projetos</h2>
+            <p>Trabalhos e ideias que refletem meu interesse por criar experiências digitais úteis e funcionais.</p>
+        </div>
+
+        <div class="projects">
+            <article class="project-card">
+                <div class="project-thumb">
+                    <img src="image1.png" alt="Portfólio profissional">
+                </div>
+                <div class="project-content">
+                    <h3>Portfólio Profissional</h3>
+                    <p>Site pessoal desenvolvido com HTML e CSS, com foco em apresentação profissional e boa experiência
+                        visual.</p>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <div class="project-thumb">
+                    <img src="image2.png" alt="Site Profissional para Grafica">
+                </div>
+                <div class="project-content">
+                    <h3>Site Profissional para Grafica</h3>
+                    <p>Desenvolvimento de site profissional para uma gráfica, com foco em apresentação de serviços e
+                        portfólio.</p>
+                </div>
+            </article>
+
+            <article class="project-card loading-project">
+                <div class="project-thumb">
+                    <img src="image3.png" alt="Projetos em desenvolvimento">
+                </div>
+                <div class="project-content">
+                    <h3>Projetos em Desenvolvimento</h3>
+                    <p>Aplicações web focadas em automação, organização e criação de soluções práticas para uso real.
+                    </p>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section id="contato">
+        <div class="section-header">
+            <h2>Contato</h2>
+            <p>Vamos conversar sobre ideias, projetos ou oportunidades.</p>
+        </div>
+
+        <div class="card contact-card">
+            <div class="contact-list">
+                <p><strong>Email:</strong> almeidadevweb@gmail.com</p>
+
+                <p><strong>GitHub:</strong> <a href="https://github.com/almeidadevweb"
+                        target="_blank">github.com/almeidadevweb</a></p>
+            </div>
+
+            <div class="contact-actions">
+                <a href="https://wa.me/5531971493965" target="_blank" rel="noopener"
+                    class="btn whatsapp-btn">WhatsApp</a>
+                <a href="curriculo.pdf" download class="btn btn-primary">Baixar currículo</a>
+                <a href="almeidadevweb@gmail.com" class="btn btn-secondary">Enviar e-mail</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 💀 2026 Anderson Almeida — Desenvolvedor Web</p>
+    </footer>
+
+</body>
+
+</html>
